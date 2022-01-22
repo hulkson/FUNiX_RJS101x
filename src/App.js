@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import { Navbar, NavbarBrand } from 'reactstrap';
-import Menu from './components/MenuComponent';
+import StaffList from './components/StaffListComponent';
 import './App.css';
-import { DISHES } from './shared/dishes';
+import { STAFFS, ROLE, DEPARTMENTS } from './shared/staffs';
 
 class App extends Component {
 
@@ -11,7 +10,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      dishes: DISHES
+      staffs: STAFFS,
+      role: ROLE,
+      deparment: DEPARTMENTS
     }
   }
 
@@ -20,10 +21,10 @@ class App extends Component {
       <div>
         <Navbar dark color="primary">
           <div className="container">
-            <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+            <NavbarBrand href="/">Ứng Dụng Quản Lý Nhân Sự v1.0</NavbarBrand>
           </div>
         </Navbar>
-        <Menu dishes={this.state.dishes}/>
+        <StaffList staffs={this.state.staffs}/>
       </div>
     );
   }
