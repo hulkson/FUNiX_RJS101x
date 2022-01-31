@@ -1,0 +1,15 @@
+.role-item {
+  margin: 20px;
+  padding: 20px;
+  text-align: left;
+  border: grey 1px solid;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.role-item:hover {
+  cursor: pointer;
+  background-color: rgba(212, 212, 212, 0.4);
+}
+
+
