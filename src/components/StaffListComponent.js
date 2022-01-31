@@ -55,33 +55,6 @@ class StaffList extends Component {
           <h5>Overtime working day</h5>
           <p>{staff.overTime}</p>
           </div>
-
-          {/* <Table responsive>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Staff Name</th>
-                <th>Staff Birthday</th>
-                <th>Start Date</th>
-                <th>Workplace</th>
-                <th>Position</th>
-                <th>Annual Leave Left</th>
-                <th>Overtime working day</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{staff.id}</td>
-                <td>{staff.name}</td>
-                <td>{dateFormat(staff.doB, "dd/mm/yyyy")}</td>
-                <td>{dateFormat(staff.startDate, "dd/mm/yyyy")}</td>
-                <td>{staff.department.id}</td>
-                <td>{staff.department.name}</td>
-                <td>{staff.annualLeave}</td>
-                <td>{staff.overTime}</td>
-              </tr>
-            </tbody>
-          </Table> */}
         </div>
       );
     } else return <div></div>;
