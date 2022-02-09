@@ -23,3 +23,21 @@
   border-radius: 5px;
   object-fit: cover;
 }
+
+.header-function {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-function input,span {
+  margin: 0 10px;
+}
+
+.header-right-box {
+  display: flex;
+
+}
+
+.search-form {
+  display: flex;
+}
