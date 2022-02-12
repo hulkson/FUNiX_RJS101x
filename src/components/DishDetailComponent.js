@@ -18,6 +18,7 @@ import {
 import { Link } from "react-router-dom";
 import "./DishDetailComponent.css";
 import { Control, LocalForm, Errors } from "react-redux-form";
+import { Loading } from './LoadingComponent';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -182,7 +183,27 @@ function RenderComments({ comments, dishId, addComment }) {
 }
 
 const DishDetail = (props) => {
-  if (props.dish != null) {
+  if (props.isLoading) {
+    return (
+      <div className="conatainer">
+        <div className="row">
+          <Loading />
+        </div>
+      </div>
+    )
+  }
+
+  else if (props.errorMessage) {
+    return (
+      <div className="conatainer">
+        <div className="row">
+          <h4>{props.errorMessage}</h4>
+        </div>
+      </div>
+    )
+  }
+
+  else if (props.dish != null) {
     return (
       <div className="container">
         <div className="row">
