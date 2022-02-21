@@ -1,25 +1,63 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-import HomePage from "./HomePageComponent";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
+import HomePage from "./HomePageComponent";
 import StaffDetail from "./StaffDetailComponent";
-import SalaryTable from "./SalaryTableComponent";
 import RoleTable from "./RoleTableComponent";
-import { connect } from 'react-redux';
+import RoleTableDetail from "./RoleTableDetailComponent";
+import SalaryTable from "./SalaryTableComponent";
+import { connect } from "react-redux";
+import {
+  postStaff,
+  delStaff,
+  fetchStaffs,
+  fetchDepts,
+  fetchSalary,
+} from "../redux/actions/ActionCreators";
 
-const mapStateToProps = state => {
-    return {
-      staffs: state.staffs,
-      departments: state.departments,
-      selectedStaff: state.selectedStaff
-    }
-}
+const mapStateToProps = (state) => {
+  return {
+    staffs: state.staffs,
+    departments: state.departments,
+    selectedStaff: state.selectedStaff,
+    selectedDept: state.selectedDept,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  postStaff: (name, doB, startDate, departmentId, salaryScale, annualLeave, overTime) =>
+    dispatch(
+      postStaff(name, doB, startDate, departmentId, salaryScale, annualLeave, overTime)
+    ),
+
+  delStaff: (staffId) => dispatch(delStaff(staffId)),
+
+  fetchStaffs: () => {
+    dispatch(fetchStaffs());
+  },
+
+  fetchDepts: () => {
+    dispatch(fetchDepts());
+  },
+  fetchSalary: () => {
+    dispatch(fetchSalary());
+  },
+});
 
 class Main extends Component {
-
   onStaffSelect(staffId) {
     this.setState({ selectedStaff: staffId });
+  }
+
+  onDeptSelect(deptId) {
+    this.setState({ selectedDept: deptId });
+  }
+
+  componentDidMount() {
+    this.props.fetchStaffs();
+    this.props.fetchDepts();
+    this.props.fetchSalary();
   }
 
   render() {
@@ -29,31 +67,65 @@ class Main extends Component {
         <Switch>
           <Route
             exact
-            path="/home"
+            path="/staffs"
             component={() => (
               <HomePage
-                staffs={this.props.staffs}
-                onClick={(staffId) => this.onStaffSelect(staffId)}
+                staffs={this.props.staffs.staffs}
+                staffsLoading={this.props.staffs.isLoading}
+                staffsErrorMess={this.props.staffs.errorMess}
+                onClick={(staffId) => {
+                  this.onStaffSelect(staffId)
+                }}
                 departments={this.props.departments}
+                postStaff={this.props.postStaff}
+                delStaff={this.props.delStaff}
               />
             )}
           />
           <Route
-            path="/home/:staffId"
+            path="/staffs/:staffId"
             component={() => (
-              <StaffDetail staff={this.props.staffs.filter(staff => staff.id === this.state.selectedStaff)[0]}
+              <StaffDetail
+                departments={this.props.departments.depts}
+                staff={
+                  this.props.staffs.staffs.filter(
+                    (staff) => staff.id === this.state.selectedStaff
+                  )[0]
+                }
               />
             )}
           />
+
           <Route
-            path="/salary-table"
-            component={() => <SalaryTable staffs={this.props.staffs} />}
+            path="/staffsSalary"
+            component={() => <SalaryTable staffs={this.props.staffs.staffs} />}
           />
+
           <Route
-            path="/role-table"
-            component={() => <RoleTable staffs={this.props.departments} />}
+            path="/departments/:deptId"
+            component={() => (
+              <RoleTableDetail
+                staffs={
+                  this.props.staffs.staffs.filter(
+                    (staff) => staff.departmentId === this.state.selectedDept
+                  )
+                }
+                onClick={(staffId) => this.onStaffSelect(staffId)}
+              />
+            )}
           />
-          <Redirect to="/home" />
+
+          <Route
+            path="/departments"
+            component={() => (
+              <RoleTable
+                depts={this.props.departments}
+                onClick={(deptId) => this.onDeptSelect(deptId)}
+              />
+            )}
+          />
+
+          <Redirect to="/staffs" />
         </Switch>
         <Footer />
       </div>
@@ -61,4 +133,4 @@ class Main extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

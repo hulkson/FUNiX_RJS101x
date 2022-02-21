@@ -33,7 +33,7 @@ class Header extends Component {
             <NavbarToggler onClick={this.toggleNav} />
             <NavbarBrand className="mr-auto" href="/">
               <img
-                src="assets/images/logo.png"
+                src="asset/images/logo.png"
                 height="30"
                 width="41"
                 alt="Ristorante Con Fusion"
@@ -42,19 +42,19 @@ class Header extends Component {
             <Collapse isOpen={this.state.isNavOpen} navbar>
               <Nav navbar>
                 <NavItem>
-                  <NavLink className="nav-link" to="/home">
+                  <NavLink className="nav-link" to="/staffs">
                     <span className="fa fa-users fa-lg"></span> Nhân Viên
                   </NavLink>
                 </NavItem>
 
                 <NavItem>
-                  <NavLink className="nav-link" to="/role-table">
+                  <NavLink className="nav-link" to="/departments">
                     <span className="fa fa-id-card fa-lg"></span> Phòng Ban
                   </NavLink>
                 </NavItem>
 
                 <NavItem>
-                  <NavLink className="nav-link" to="/salary-table">
+                  <NavLink className="nav-link" to="/staffsSalary">
                     <span className="fa fa-money fa-lg"></span> Bảng Lương
                   </NavLink>
                 </NavItem>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Row, Label, Col } from "reactstrap";
-import { Control, LocalForm, Errors } from "react-redux-form";
+import { Control, Form, Errors } from "react-redux-form";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -9,35 +9,20 @@ const isNumber = (val) => !isNaN(val);
 
 const AddForm = (props) => {
   const handleSubmit = (values) => {
-    const newStaff = {
-      id: props.staffs.length,
-      name: values.name,
-      doB: values.doB,
-      salaryScale: values.salaryScale,
-      startDate: values.startDate,
-      department: values.department,
-      annualLeave: values.annualLeave,
-      overTime: values.overTime,
-      image: "/assets/images/alberto.png",
-    };
-
-    for (let i = 0; i < props.departments.length; i++) {
-      if (newStaff.department === props.departments[i].id) {
-        newStaff.department = props.departments[i];
-        break;
-      }
-    }
-
-    props.staffs.push(newStaff);
-
-    const jsonProps = JSON.stringify(props.staffs);
-    localStorage.setItem("staffs", jsonProps);
-
+    props.postStaff(
+      values.name,
+      values.doB,
+      values.salaryScale,
+      values.startDate,
+      values.department,
+      values.annualLeave,
+      values.overTime,
+    )
     props.isOpen();
   };
   
   return (
-    <LocalForm onSubmit={handleSubmit}>
+    <Form model='addForm' onSubmit={handleSubmit}>
       <Row className="form-group">
         <Label htmlFor="name" md={4}>
           Họ Và Tên:
@@ -224,7 +209,7 @@ const AddForm = (props) => {
           </Button>
         </Col>
       </Row>
-    </LocalForm>
+    </Form>
   );
 };
 

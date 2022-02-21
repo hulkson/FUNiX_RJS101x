@@ -4,6 +4,7 @@
   border: grey 1px solid;
   border-radius: 5px;
   background-color: rgba(13, 110, 253, 0.2);
+  position: relative;
 }
 
 .staff-item:hover a {
@@ -13,6 +14,19 @@
 .staff-item:hover {
   cursor: pointer;
   background-color: rgba(13, 110, 253, 0.4);
+}
+
+.staff-item:hover .del-staff-btn {
+  display: inline-block;
+}
+
+.del-staff-btn {
+  position: absolute;
+  display: none;
+  font-size: 15px;
+  left: 0;
+  right: 0;
+  bottom: 5px;
 }
 
 .staff-item img {

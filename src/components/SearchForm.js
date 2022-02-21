@@ -1,19 +1,18 @@
 import React from "react";
 import { Button } from "reactstrap";
 import { Control, LocalForm } from "react-redux-form";
-import { STAFFS } from "../shared/staffs";
 
 const SearchForm = (props) => {
   const handleSearch = (values) => {
+    console.log(values.searchText);
     let filteredArray;
     if (values.searchText === "" || values.searchText === undefined) {
       filteredArray = props.staffs;
-      localStorage.setItem("staffs", JSON.stringify(STAFFS));
+      
     } else {
       filteredArray = props.staffs.filter((staff) =>
         staff.name.toLowerCase().includes(values.searchText)
       );
-      localStorage.setItem("staffs", JSON.stringify(filteredArray));
     }
     props.setStaffs(filteredArray);
   };

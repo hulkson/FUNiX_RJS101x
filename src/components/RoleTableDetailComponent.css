@@ -1,0 +1,26 @@
+.staff-detail__item {
+  display: flex;
+  margin: 30px 0;
+  justify-content: center;
+}
+
+.staff-avatar img {
+  width: 200px;
+  border-radius: 5px;
+}
+
+.staff-content {
+  margin: 0 0 0 50px;
+}
+
+@media (max-width: 620px) {
+  .staff-detail__item {
+    display: block;
+    text-align: center;
+  }
+
+  .staff-content {
+    margin: 20px 0 0;
+  }
+}
+
