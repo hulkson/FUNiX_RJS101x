@@ -1,6 +1,5 @@
 import * as ActionsType from "./ActionsType";
 import { baseUrl } from "../../shared/baseUrl";
-import fetch from "cross-fetch";
 
 export const addComment = (comment) => {
   return {
