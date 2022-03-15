@@ -90,7 +90,7 @@ export const postStaff = (
     }
   )
   .then((response) => response.json())
-  .then((response) => dispatch(addStaff(response)))
+  .then((response) => dispatch(fetchStaffs()))
   .catch((error) => {
     alert("Your staff could not be posted\nError: " + error.message);
   });
@@ -123,7 +123,7 @@ export const delStaff = (staffId) => (dispatch) => {
     }
   )
   .then((response) => response.json())
-  .then((response) => dispatch(addStaff(response)))
+  .then((response) => dispatch(fetchStaffs()))
   .catch((error) => {
     alert("Your staff could not be delete\nError: " + error.message);
   });
